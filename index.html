@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기간 계산기</title>
+</head>
+<body>
+
+<script>
+    function calculateDuration() {
+        var amount = parseInt(document.getElementById("amountInput").value);
+
+        var baseDuration = 10;  
+        var additionalDuration = Math.max(0, Math.floor((amount - 100) / 100)) * 2;  
+        var totalDuration = baseDuration + additionalDuration;
+
+        var currentDate = new Date();
+
+        var futureDate = new Date(currentDate.getTime() + totalDuration * 24 * 60 * 60 * 1000);
+
+        document.getElementById("result").innerHTML = "역할을 얼마나 길게 줘야 하는지: " + totalDuration + "일";
+        document.getElementById("futureDate").innerHTML = "| " + amount + "원 | " + totalDuration + "일 | &lt;t:" + Math.floor(futureDate.getTime() / 1000) + ":R&gt;";
+    }
+</script>
+
+<h1>금액을 입력하세요 (100원 이상):</h1>
+<input type="text" id="amountInput" placeholder="금액 입력" />
+<button onclick="calculateDuration()">계산</button>
+
+<div id="result"></div>
+
+<h2>결과:</h2>
+<table>
+    <thead>
+        <tr>
+            <th>[몇원]</th>
+            <th>[몇일]</th>
+            <th>날짜</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr id="futureDate"></tr>
+    </tbody>
+</table>
+
+</body>
+</html>
